@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SadHub Scripts</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/QPbUn18.jpeg" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #111, #1b1b1b);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #181818;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 30px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            opacity: 0.7;
+        }
+
+        .scriptBox {
+            background: #101010;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        code {
+            background: #0a0a0a;
+            padding: 12px;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-x: auto;
+            word-break: break-word;
+            border: 1px solid #222;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #6a00ff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: #7d25ff;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SadHub Scripts</h1>
+        <p>Copie qualquer script clicando no botão abaixo:</p>
+
+        <!-- Loader Universal -->
+        <div class="scriptBox">
+            <strong>Loader Universal</strong>
+            <code id="loader">loadstring(game:HttpGet("https://raw.githubusercontent.com/SadExility/SadScripts/refs/heads/main/loader.lua",true))()</code>
+            <button onclick="copy('loader')">Copiar Loader</button>
+        </div>
+
+        <!-- SadHub FPS -->
+        <div class="scriptBox">
+            <strong>SadHub: FPS</strong>
+            <code id="fps">loadstring(game:HttpGet("https://raw.githubusercontent.com/SadExility/SadScripts/refs/heads/main/SadHubFPS.txt",true))()</code>
+            <button onclick="copy('fps')">Copiar SadHub FPS</button>
+        </div>
+
+        <!-- Camlock V3 -->
+        <div class="scriptBox">
+            <strong>SadHub: Camlock V3</strong>
+            <code id="camv3">loadstring(game:HttpGet("https://raw.githubusercontent.com/SadExility/SadScripts/refs/heads/main/SadHubCamlockV3.txt",true))()</code>
+            <button onclick="copy('camv3')">Copiar Camlock V3</button>
+        </div>
+
+        <!-- Camlock V2 -->
+        <div class="scriptBox">
+            <strong>SadHub: Camlock V2</strong>
+            <code id="camv2">loadstring(game:HttpGet("https://raw.githubusercontent.com/SadExility/SadScripts/refs/heads/main/SadHubV2",true))()</code>
+            <button onclick="copy('camv2')">Copiar Camlock V2</button>
+        </div>
+
+    </div>
+
+    <script>
+        function copy(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            alert("Copiado para a área de transferência!");
+        }
+    </script>
+</body>
+</html>
+  
