@@ -1,0 +1,310 @@
+-- ts file was generated at discord.gg/25ms
+
+
+repeat
+    task.wait()
+until game:IsLoaded() and (game.Players and (game.Players.LocalPlayer and game.Players.LocalPlayer.Character))
+if getgenv().AntiAFKActive then
+    warn("[Anti-AFK] Already running. Destroying previous instance...")
+    if game.CoreGui:FindFirstChild("AntiAFKGui") then
+        game.CoreGui.AntiAFKGui:Destroy()
+    end
+    getgenv().AntiAFKActive = false
+    getgenv().TimerRunning = false
+    task.wait(0.5)
+end
+getgenv().AntiAFKActive = true
+local v1 = game:GetService("Players")
+local vu2 = game:GetService("CoreGui")
+local vu3 = game:GetService("TweenService")
+local v4 = game:GetService("RunService")
+local vu5 = game:GetService("UserInputService")
+local vu6 = game:GetService("VirtualUser")
+local vu7 = game:GetService("Stats")
+local v8 = v1.LocalPlayer
+local vu9 = {
+    UpdateInterval = 1,
+    FPSUpdateRate = 0.1,
+    DragSmoothness = 0.04
+}
+local vu30, v31, vu32, vu33, vu34, vu35, vu36, _ = (function()
+    local v10 = Instance.new("ScreenGui")
+    local v11 = Instance.new("Frame")
+    local v12 = Instance.new("UICorner")
+    local v13 = Instance.new("UIStroke")
+    local v14 = Instance.new("Frame")
+    local v15 = Instance.new("TextLabel")
+    local v16 = Instance.new("TextButton")
+    local v17 = Instance.new("Frame")
+    local v18 = Instance.new("Frame")
+    local v19 = Instance.new("TextLabel")
+    local v20 = Instance.new("TextLabel")
+    local v21 = Instance.new("TextLabel")
+    local v22 = Instance.new("TextLabel")
+    local v23 = Instance.new("TextLabel")
+    local v24 = Instance.new("TextLabel")
+    local v25 = Instance.new("Frame")
+    local v26 = Instance.new("Frame")
+    local v27 = Instance.new("TextLabel")
+    v10.Name = "AntiAFKGui"
+    v10.Parent = vu2
+    v10.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    v10.ResetOnSpawn = false
+    v11.Name = "MainFrame"
+    v11.Parent = v10
+    v11.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
+    v11.BorderSizePixel = 0
+    v11.Position = UDim2.new(0.02, 0, 0.3, 0)
+    v11.Size = UDim2.new(0, 260, 0, 160)
+    v11.Active = true
+    v12.CornerRadius = UDim.new(0, 4)
+    v12.Parent = v11
+    v13.Color = Color3.fromRGB(40, 40, 40)
+    v13.Thickness = 1
+    v13.Parent = v11
+    v14.Name = "TopBar"
+    v14.Parent = v11
+    v14.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    v14.BorderSizePixel = 0
+    v14.Size = UDim2.new(1, 0, 0, 32)
+    v15.Name = "Title"
+    v15.Parent = v14
+    v15.BackgroundTransparency = 1
+    v15.Position = UDim2.new(0, 12, 0, 0)
+    v15.Size = UDim2.new(0.75, 0, 1, 0)
+    v15.Font = Enum.Font.SourceSans
+    v15.Text = "NEOX HUB | ANTI-AFK SYSTEM"
+    v15.TextColor3 = Color3.fromRGB(220, 220, 220)
+    v15.TextSize = 13
+    v15.TextXAlignment = Enum.TextXAlignment.Left
+    v16.Name = "CloseButton"
+    v16.Parent = v14
+    v16.BackgroundTransparency = 1
+    v16.Position = UDim2.new(1, - 32, 0, 0)
+    v16.Size = UDim2.new(0, 32, 0, 32)
+    v16.Font = Enum.Font.SourceSans
+    v16.Text = "\239\191\189"
+    v16.TextColor3 = Color3.fromRGB(180, 180, 180)
+    v16.TextSize = 18
+    v17.Name = "Divider"
+    v17.Parent = v11
+    v17.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    v17.BorderSizePixel = 0
+    v17.Position = UDim2.new(0, 0, 0, 32)
+    v17.Size = UDim2.new(1, 0, 0, 1)
+    v18.Name = "StatsFrame"
+    v18.Parent = v11
+    v18.BackgroundTransparency = 1
+    v18.Position = UDim2.new(0, 12, 0, 45)
+    v18.Size = UDim2.new(1, - 24, 0, 75)
+    v19.Name = "TimerLabel"
+    v19.Parent = v18
+    v19.BackgroundTransparency = 1
+    v19.Position = UDim2.new(0, 0, 0, 0)
+    v19.Size = UDim2.new(0, 80, 0, 20)
+    v19.Font = Enum.Font.SourceSans
+    v19.Text = "UPTIME"
+    v19.TextColor3 = Color3.fromRGB(140, 140, 140)
+    v19.TextSize = 12
+    v19.TextXAlignment = Enum.TextXAlignment.Left
+    v20.Name = "TimerValue"
+    v20.Parent = v18
+    v20.BackgroundTransparency = 1
+    v20.Position = UDim2.new(0, 80, 0, 0)
+    v20.Size = UDim2.new(1, - 80, 0, 20)
+    v20.Font = Enum.Font.SourceSansSemibold
+    v20.Text = "00:00:00"
+    v20.TextColor3 = Color3.fromRGB(240, 240, 240)
+    v20.TextSize = 12
+    v20.TextXAlignment = Enum.TextXAlignment.Right
+    v21.Name = "FPSLabel"
+    v21.Parent = v18
+    v21.BackgroundTransparency = 1
+    v21.Position = UDim2.new(0, 0, 0, 25)
+    v21.Size = UDim2.new(0, 80, 0, 20)
+    v21.Font = Enum.Font.SourceSans
+    v21.Text = "FPS"
+    v21.TextColor3 = Color3.fromRGB(140, 140, 140)
+    v21.TextSize = 12
+    v21.TextXAlignment = Enum.TextXAlignment.Left
+    v22.Name = "FPSValue"
+    v22.Parent = v18
+    v22.BackgroundTransparency = 1
+    v22.Position = UDim2.new(0, 80, 0, 25)
+    v22.Size = UDim2.new(1, - 80, 0, 20)
+    v22.Font = Enum.Font.SourceSansSemibold
+    v22.Text = "0"
+    v22.TextColor3 = Color3.fromRGB(240, 240, 240)
+    v22.TextSize = 12
+    v22.TextXAlignment = Enum.TextXAlignment.Right
+    v23.Name = "PingLabel"
+    v23.Parent = v18
+    v23.BackgroundTransparency = 1
+    v23.Position = UDim2.new(0, 0, 0, 50)
+    v23.Size = UDim2.new(0, 80, 0, 20)
+    v23.Font = Enum.Font.SourceSans
+    v23.Text = "PING"
+    v23.TextColor3 = Color3.fromRGB(140, 140, 140)
+    v23.TextSize = 12
+    v23.TextXAlignment = Enum.TextXAlignment.Left
+    v24.Name = "PingValue"
+    v24.Parent = v18
+    v24.BackgroundTransparency = 1
+    v24.Position = UDim2.new(0, 80, 0, 50)
+    v24.Size = UDim2.new(1, - 80, 0, 20)
+    v24.Font = Enum.Font.SourceSansSemibold
+    v24.Text = "0 ms"
+    v24.TextColor3 = Color3.fromRGB(240, 240, 240)
+    v24.TextSize = 12
+    v24.TextXAlignment = Enum.TextXAlignment.Right
+    v25.Name = "StatusFrame"
+    v25.Parent = v11
+    v25.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    v25.BorderSizePixel = 0
+    v25.Position = UDim2.new(0, 12, 1, - 30)
+    v25.Size = UDim2.new(1, - 24, 0, 22)
+    local v28 = Instance.new("UICorner")
+    v28.CornerRadius = UDim.new(0, 3)
+    v28.Parent = v25
+    v26.Name = "StatusIndicator"
+    v26.Parent = v25
+    v26.BackgroundColor3 = Color3.fromRGB(46, 204, 113)
+    v26.BorderSizePixel = 0
+    v26.Position = UDim2.new(0, 6, 0.5, - 3)
+    v26.Size = UDim2.new(0, 6, 0, 6)
+    local v29 = Instance.new("UICorner")
+    v29.CornerRadius = UDim.new(1, 0)
+    v29.Parent = v26
+    v27.Name = "StatusLabel"
+    v27.Parent = v25
+    v27.BackgroundTransparency = 1
+    v27.Position = UDim2.new(0, 18, 0, 0)
+    v27.Size = UDim2.new(1, - 18, 1, 0)
+    v27.Font = Enum.Font.SourceSans
+    v27.Text = "Active"
+    v27.TextColor3 = Color3.fromRGB(180, 180, 180)
+    v27.TextSize = 11
+    v27.TextXAlignment = Enum.TextXAlignment.Left
+    return v10, v11, v16, v20, v22, v24, v26, v27
+end)()
+game.StarterGui:SetCore("SendNotification", {
+    Title = "NEOX HUB | Anti-AFK System",
+    Text = "System initialized successfully",
+    Duration = 3
+});
+(function(pu37)
+    local vu38 = nil
+    local vu39 = nil
+    local vu40 = nil
+    local vu41 = nil
+    local function vu45(p42)
+        local v43 = p42.Position - vu41
+        local v44 = {
+            Position = UDim2.new(vu38.X.Scale, vu38.X.Offset + v43.X, vu38.Y.Scale, vu38.Y.Offset + v43.Y)
+        }
+        vu3:Create(pu37, TweenInfo.new(vu9.DragSmoothness, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), v44):Play()
+    end
+    pu37.InputBegan:Connect(function(pu46)
+        if pu46.UserInputType == Enum.UserInputType.MouseButton1 or pu46.UserInputType == Enum.UserInputType.Touch then
+            vu39 = true
+            vu41 = pu46.Position
+            vu38 = pu37.Position
+            pu46.Changed:Connect(function()
+                if pu46.UserInputState == Enum.UserInputState.End then
+                    vu39 = false
+                end
+            end)
+        end
+    end)
+    pu37.InputChanged:Connect(function(p47)
+        if p47.UserInputType == Enum.UserInputType.MouseMovement or p47.UserInputType == Enum.UserInputType.Touch then
+            vu40 = p47
+        end
+    end)
+    vu5.InputChanged:Connect(function(p48)
+        if p48 == vu40 and vu39 then
+            vu45(p48)
+        end
+    end)
+end)(v31)
+vu32.MouseButton1Click:Connect(function()
+    getgenv().AntiAFKActive = false
+    getgenv().TimerRunning = false
+    vu30:Destroy()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "NEOX HUB | Anti-AFK System",
+        Text = "System disabled",
+        Duration = 3
+    })
+end)
+vu32.MouseEnter:Connect(function()
+    vu3:Create(vu32, TweenInfo.new(0.2), {
+        TextColor3 = Color3.fromRGB(255, 255, 255)
+    }):Play()
+end)
+vu32.MouseLeave:Connect(function()
+    vu3:Create(vu32, TweenInfo.new(0.2), {
+        TextColor3 = Color3.fromRGB(180, 180, 180)
+    }):Play()
+end)
+v8.Idled:Connect(function()
+    vu6:CaptureController()
+    vu6:ClickButton2(Vector2.new())
+    vu3:Create(vu36, TweenInfo.new(0.15), {
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    }):Play()
+    task.wait(0.15)
+    vu3:Create(vu36, TweenInfo.new(0.15), {
+        BackgroundColor3 = Color3.fromRGB(46, 204, 113)
+    }):Play()
+end)
+local vu49 = {}
+local vu50 = 0
+v4.RenderStepped:Connect(function()
+    local v51 = tick()
+    for v52 = # vu49, 1, - 1 do
+        if vu49[v52] < v51 - 1 then
+            table.remove(vu49, v52)
+        end
+    end
+    table.insert(vu49, v51)
+    if v51 - vu50 >= vu9.FPSUpdateRate then
+        local v53 = # vu49
+        vu34.Text = tostring(v53)
+        vu50 = v51
+    end
+end)
+task.spawn(function()
+    while getgenv().AntiAFKActive do
+        local v54, v55 = pcall(function()
+            return vu7.PerformanceStats.Ping:GetValue()
+        end)
+        if v54 and v55 then
+            vu35.Text = math.floor(v55) .. " ms"
+        else
+            vu35.Text = "N/A"
+        end
+        task.wait(vu9.UpdateInterval)
+    end
+end)
+local vu56 = 0
+local vu57 = 0
+local vu58 = 0
+getgenv().TimerRunning = true
+task.spawn(function()
+    while getgenv().TimerRunning do
+        task.wait(1)
+        if getgenv().AntiAFKActive then
+            vu56 = vu56 + 1
+            if vu56 >= 60 then
+                vu56 = 0
+                vu57 = vu57 + 1
+            end
+            if vu57 >= 60 then
+                vu57 = 0
+                vu58 = vu58 + 1
+            end
+            vu33.Text = string.format("%02d:%02d:%02d", vu58, vu57, vu56)
+        end
+    end
+end)
