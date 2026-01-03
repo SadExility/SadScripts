@@ -1552,7 +1552,7 @@ v339:Button({
     Justify = "Center",
     Callback = function()
         if pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/SadExility/SadScripts/refs/heads/main/AntiAfkSafe.lua.txt"))()
         end) then
             vu18:Notify({
                 Title = "Anti-AFK",
@@ -2170,7 +2170,7 @@ v412:Button({
     Justify = "Center",
     Callback = function()
         if pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/SadExility/SadScripts/refs/heads/main/AntiAfkSafe.lua.txt"))()
         end) then
             vu18:Notify({
                 Title = "Anti-AFK",
